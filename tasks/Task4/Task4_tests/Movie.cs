@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Task4_tests
 {
-    public class Movie: Medien
+    public class Movie : Medien
     {
         //Properties
         private string name;
@@ -21,22 +21,17 @@ namespace Task4_tests
             Console.WriteLine("Filmname: " + name);
             Console.WriteLine("Rating:   " + rating);
             Console.WriteLine("Gesehen:  " + seen);
-            Console.WriteLine("Handlung  " + description);
+            Console.WriteLine("Handlung: " + description);
             Console.WriteLine("Preis     " + UpdatePrice);
         }
         public void print_name_rating()
         {
             Console.WriteLine("Film: " + name + " Rating: " + rating + "/10");
         }
-        
+
         public string Name
         {
             get { return name; }
-        }
-        public string Description
-        {
-            get { return description ; }
-            set { UpdateDescription(value); }
         }
         public double Price
         {
@@ -51,7 +46,7 @@ namespace Task4_tests
             get { return rating; }
         }
         //Constructoren
-        public Movie(string Name, decimal rRting, string Description, double Price)
+        public Movie(string Name, decimal Rating, string Description, double Price, bool Seen)
         {
 
             if (Name == null || Name.Length == 0)
@@ -59,11 +54,13 @@ namespace Task4_tests
             name = Name;
 
             UpdateRating(Rating);
-            UpdateDescription(Description);
+           // UpdateDescription(Description);
             SetPrice(Price);
             seen = false;
         }
-        public Movie(string Name, double Price) : this(Name, 0, "", Price) { }
+        public Movie(string Name, double UpdatePrice) : this(Name, 0, "", UpdatePrice, false) { }
+        [JsonConstructor]
+        public Movie(string Name, double Price, bool Seen, decimal Rating): this (Name, Rating,"",Price, Seen) { }
 
         //Methods
         public void UpdateRating(decimal Rating)
@@ -98,6 +95,10 @@ namespace Task4_tests
         {
            set { SetPrice(value); }
            get { return price; }
+        }
+        public string GetDescription()
+        {
+            return description;
         }
 
     }

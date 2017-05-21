@@ -24,15 +24,14 @@ namespace Task4_tests
             
             Assert.IsTrue(testmovie.Rating == 0);
         }
-        [Test]
-        public void Serie_Description_Test()
+       [Test]
+         public void Serie_Description_Test()
         {
             var testserie = new Serie("Hallo",0, 10);
-            Assert.IsTrue(testserie.Description == "");
+            Assert.IsTrue(testserie.GetDescription() == "");
           
         
         }
-
         [Test]
         public void Movie_Rating_Update_Test()
         {

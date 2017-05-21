@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Task4_tests
 {
@@ -30,23 +31,9 @@ namespace Task4_tests
             Console.WriteLine("Serie: " + name + " Rating: " + rating + "/10");
         }
        
-        //raus?
         public string Name
         {
             get { return name; }
-        }
-        public string Description
-        {
-            get { return description; }
-            set { UpdateDescription(value); }
-        }
-        public double Price
-        {
-            get { return price; }
-        }
-        public bool Seen
-        {
-            get { return seen; }
         }
         public decimal Rating
         {
@@ -56,8 +43,18 @@ namespace Task4_tests
         {
             get { return season; }
         }
-
-        public Serie(string Name, decimal Rating, string Description, int Season, double Price)
+        public double Price
+        {
+            get { return price; }
+        }
+        public bool Seen
+        {
+            get { return seen; }
+        }
+        
+      
+        //Constructors
+        public Serie(string Name, decimal Rating, string Description, int Season, double Price,bool Seen)
         {
             if (Name == null || Name.Length == 0)
                 throw new ArgumentException("Titel fehlt");
@@ -65,9 +62,12 @@ namespace Task4_tests
             season = Season;
             UpdateRating(Rating);
             UpdateDescription(Description);
+            seen = Seen;
         }
-        public Serie(string Name, int Season, double Price) : this(Name, 0, "", Season, Price) { }
-
+        public Serie(string Name, int Season, double Price) : this(Name, 0, "", Season, Price,false) { }
+        [JsonConstructor]
+        public Serie(string Name, decimal Rating, int Season, double Price, bool Seen) : this(Name, Rating, "", Season, Price, Seen) { }
+        //Methoden
         public void UpdateRating(decimal Rating)
         {
             if (Rating < 0 || Rating > 10)
@@ -93,13 +93,17 @@ namespace Task4_tests
         }
         private void SetPrice(double Price)
         {
-            if (Price <= 0) throw new ArgumentException("Preis darf nicht negativ sein!");
+            if (Price < 0) throw new ArgumentException("Preis darf nicht negativ sein!");
             price = Price;
         }
         public double UpdatePrice
         {
             set { SetPrice(value); }
             get { return price; }
+        }
+        public string GetDescription()
+        {
+            return description;
         }
     }
 
