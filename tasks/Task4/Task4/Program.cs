@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace task3
+namespace task4
 {
     interface Medien
     {
@@ -13,7 +13,7 @@ namespace task3
         string Description { get; set; }
     }
 
-    public class Movie:Medien
+    public class Movie : Medien
     {
         private string name;
         private decimal rating;
@@ -39,7 +39,7 @@ namespace task3
         //Constructoren
         public Movie(string newName, decimal newRating, string newDescription)
         {
-            
+
             if (newName == null || newName.Length == 0)
                 throw new ArgumentException("Titel fehlt");
             name = newName;
@@ -66,13 +66,13 @@ namespace task3
         }
 
         private void UpdateSeen()
-        { 
+        {
             seen = true;
         }
 
         private void UpdateDescription(string NewDescription)
         {
-            if(NewDescription != null || NewDescription.Length == 0 || NewDescription != description)
+            if (NewDescription != null || NewDescription.Length == 0 || NewDescription != description)
             {
                 description = NewDescription;
             }
@@ -81,7 +81,7 @@ namespace task3
 
     }
 
-    class Serie:Medien
+    class Serie : Medien
     {
         private string name;
         private decimal rating;
@@ -107,7 +107,7 @@ namespace task3
             return name;
         }
 
-        public Serie( string NewName, decimal NewRating,string NewDescription, int NewSeasons)
+        public Serie(string NewName, decimal NewRating, string NewDescription, int NewSeasons)
         {
             if (NewName == null || NewName.Length == 0)
                 throw new ArgumentException("Titel fehlt");
@@ -116,9 +116,9 @@ namespace task3
             UpdateRating(NewRating);
             UpdateDescription(NewDescription);
         }
-        public Serie(string NewName,int NewSeasons): this (NewName,0,"",NewSeasons) { }
-        public Serie(string NewName): this (NewName,0,"",1) { }
-        public Serie(string NewName, decimal NewRating): this (NewName,NewRating,"",1) { }
+        public Serie(string NewName, int NewSeasons) : this(NewName, 0, "", NewSeasons) { }
+        public Serie(string NewName) : this(NewName, 0, "", 1) { }
+        public Serie(string NewName, decimal NewRating) : this(NewName, NewRating, "", 1) { }
 
         public void UpdateRating(decimal NewRating)
         {
@@ -153,28 +153,28 @@ namespace task3
         {
 
             var movie_1 = new Movie("Flashback", 10, "Einige Jugendliche müssen einen Mord verschleiern...");
-            var movie_2 = new Movie("Harry Potter und der Stein der Weisen","Harry erfährt, dass er ein Zauberer ist");
-            var serie_1 = new Serie("How to get away with murder",3);
+            var movie_2 = new Movie("Harry Potter und der Stein der Weisen", "Harry erfährt, dass er ein Zauberer ist");
+            var serie_1 = new Serie("How to get away with murder", 3);
 
-            var mixarray = new Medien[] { movie_1, movie_2, serie_1};
-            var mixarray_movie = new [] { movie_1, movie_2 };
-            var mixarray_serie = new [] { serie_1};
+            var mixarray = new Medien[] { movie_1, movie_2, serie_1 };
+            var mixarray_movie = new[] { movie_1, movie_2 };
+            var mixarray_serie = new[] { serie_1 };
 
             foreach (var med in mixarray)
-            { 
+            {
                 Console.WriteLine(med.getname());
                 Console.WriteLine(med.Description);
                 Console.WriteLine();
             }
-            
-            foreach(var mov in mixarray_movie)
+
+            foreach (var mov in mixarray_movie)
             {
                 mov.UpdateRating(10);
                 mov.print_all();
                 Console.WriteLine();
             }
 
-            foreach(var ser in mixarray_serie)
+            foreach (var ser in mixarray_serie)
             {
                 ser.UpdateRating(9);
                 ser.print_all();
