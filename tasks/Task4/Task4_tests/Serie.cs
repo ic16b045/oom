@@ -57,33 +57,33 @@ namespace Task4_tests
             get { return season; }
         }
 
-        public Serie(string NewName, decimal NewRating, string NewDescription, int NewSeason, double newPrice)
+        public Serie(string Name, decimal Rating, string Description, int Season, double Price)
         {
-            if (NewName == null || NewName.Length == 0)
+            if (Name == null || Name.Length == 0)
                 throw new ArgumentException("Titel fehlt");
-            name = NewName;
-            season = NewSeason;
-            UpdateRating(NewRating);
-            UpdateDescription(NewDescription);
+            name = Name;
+            season = Season;
+            UpdateRating(Rating);
+            UpdateDescription(Description);
         }
-        public Serie(string NewName, int NewSeason, double newPrice) : this(NewName, 0, "", NewSeason, newPrice) { }
+        public Serie(string Name, int Season, double Price) : this(Name, 0, "", Season, Price) { }
 
-        public void UpdateRating(decimal NewRating)
+        public void UpdateRating(decimal Rating)
         {
-            if (NewRating < 0 || NewRating > 10)
+            if (Rating < 0 || Rating > 10)
             {
                 throw new ArgumentException("Rating nicht in der Range!");
             }
 
-            rating = NewRating;
+            rating = Rating;
 
             if (rating > 0) UpdateSeen();
         }
-        private void UpdateDescription(string NewDescription)
+        private void UpdateDescription(string Description)
         {
-            if (NewDescription != null || NewDescription != "" || NewDescription != description)
+            if (Description != null || Description != "" || Description != description)
             {
-                description = NewDescription;
+                description = Description;
             }
 
         }
@@ -91,10 +91,10 @@ namespace Task4_tests
         {
             seen = true;
         }
-        private void SetPrice(double newPrice)
+        private void SetPrice(double Price)
         {
-            if (newPrice <= 0) throw new ArgumentException("Preis darf nicht negativ sein!");
-            price = newPrice;
+            if (Price <= 0) throw new ArgumentException("Preis darf nicht negativ sein!");
+            price = Price;
         }
         public double UpdatePrice
         {
