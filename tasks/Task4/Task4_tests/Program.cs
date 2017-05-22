@@ -44,8 +44,7 @@ namespace Task4_tests
             foreach (var med in json_array)
             {
                 med.print_all();
-            }
-        
+            }        
         }
     }
 }

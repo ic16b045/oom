@@ -20,8 +20,6 @@ namespace Task4_tests
         public void Movie_Rating_Test()
         {
             var testmovie = new Movie("hallo",1.3);
-            
-            
             Assert.IsTrue(testmovie.Rating == 0);
         }
        [Test]
@@ -29,8 +27,6 @@ namespace Task4_tests
         {
             var testserie = new Serie("Hallo",0, 10);
             Assert.IsTrue(testserie.GetDescription() == "");
-          
-        
         }
         [Test]
         public void Movie_Rating_Update_Test()
@@ -76,6 +72,32 @@ namespace Task4_tests
             }
 
             Assert.IsTrue(erg == 4);
+        }
+        [Test]
+        public void CannotCreateMovieWithoutTitle()
+        {
+            Assert.Catch(() =>
+            {
+                var movie_1 = new Movie("", 10.3);
+
+            });
+        }
+        [Test]
+        public void CannotCreateSerieWithoutTitle()
+        {
+            Assert.Catch(() =>
+            {
+                var serie_1 = new Serie("",1,10.2);
+            });
+        }
+        [Test]
+        public void CannotUpdateMovieWithNegativePrice()
+        {
+            Assert.Catch(() =>
+            {
+                var movie_1 = new Movie("hallo", 2.5);
+                movie_1.UpdatePrice = -10;
+            });
         }
     }
 }
