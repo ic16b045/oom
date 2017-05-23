@@ -26,7 +26,7 @@ namespace Task4_tests
             Console.WriteLine("Rating:   " + rating);
             Console.WriteLine("Gesehen:  " + seen);
             Console.WriteLine("Handlung: " + description);
-            Console.WriteLine("Preis     " + UpdatePrice);
+            Console.WriteLine("Preis     " + Price);
         }
         public void print_name_rating()
         {
@@ -40,6 +40,7 @@ namespace Task4_tests
         public double Price
         {
             get { return price; }
+            set { SetPrice(value); }
         }
         public bool Seen
         {
@@ -49,6 +50,7 @@ namespace Task4_tests
         {
             get { return rating; }
         }
+  
         //Constructors
         public Movie(string Name, decimal Rating, string Description, double Price, bool Seen)
         {
@@ -104,11 +106,7 @@ namespace Task4_tests
             price = Price;
         }
 
-        public double UpdatePrice
-        {
-           set { SetPrice(value); }
-           get { return price; }
-        }
+      
         /*Liefert Beschreibung*/
         public string GetDescription()
         {

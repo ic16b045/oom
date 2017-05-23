@@ -7,9 +7,13 @@ using Newtonsoft.Json;
 
 namespace Task4_tests
 {
+    /*
+    Klasse Serie - erbt von Medien
 
+   */
     class Serie : Medien
     {
+        //Fields
         private string name;
         private decimal rating;
         private int season;
@@ -31,6 +35,7 @@ namespace Task4_tests
             Console.WriteLine("Serie: " + name + " Rating: " + rating + "/10");
         }
        
+        //Properties
         public string Name
         {
             get { return name; }
@@ -46,6 +51,7 @@ namespace Task4_tests
         public double Price
         {
             get { return price; }
+            set { SetPrice(value); }
         }
         public bool Seen
         {
@@ -95,11 +101,6 @@ namespace Task4_tests
         {
             if (Price < 0) throw new ArgumentException("Preis darf nicht negativ sein!");
             price = Price;
-        }
-        public double UpdatePrice
-        {
-            set { SetPrice(value); }
-            get { return price; }
         }
         public string GetDescription()
         {

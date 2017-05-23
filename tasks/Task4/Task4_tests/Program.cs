@@ -36,6 +36,7 @@ namespace Task4_tests
             File.WriteAllText(file_name, json_string);
 
             var json_retour_string = File.ReadAllText(file_name);
+
             var restoreSettings = new JsonSerializerSettings() { Formatting = Formatting.Indented, TypeNameHandling = TypeNameHandling.Auto };
 
             var json_array = JsonConvert.DeserializeObject<Medien[]>(json_retour_string,restoreSettings);

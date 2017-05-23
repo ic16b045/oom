@@ -57,10 +57,10 @@ namespace Task4_tests
         public void Price_Check_Test()
         {
             var movie = new Movie("hallo", 3.2);
-            Assert.IsTrue(movie.UpdatePrice == 3.2);
+            Assert.IsTrue(movie.Price == 3.2);
         }
         [Test]
-        public void Movie_Bill_Test()
+        public void Movie_Sum_Test()
         {
             var movie_1 = new Movie("hallo", 2.5);
             var movie_2 = new Movie("hallo2", 1.5);
@@ -68,7 +68,7 @@ namespace Task4_tests
             double erg = 0;
             foreach (var mov in bill)
             {
-                erg = erg + mov.UpdatePrice;
+                erg = erg + mov.Price;
             }
 
             Assert.IsTrue(erg == 4);
@@ -93,11 +93,19 @@ namespace Task4_tests
         [Test]
         public void CannotUpdateMovieWithNegativePrice()
         {
-            Assert.Catch(() =>
+            Assert.Catch((TestDelegate)(() =>
             {
                 var movie_1 = new Movie("hallo", 2.5);
-                movie_1.UpdatePrice = -10;
-            });
+                movie_1.Price = -10;
+            }));
+        }
+        [Test]
+        public void ChangeSeriePreis()
+        {
+            var serie_1 = new Serie("Test", 1, 1);
+            serie_1.Price = 20;
+
+            Assert.IsTrue(serie_1.Price == 20);
         }
     }
 }
