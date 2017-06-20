@@ -85,7 +85,7 @@ namespace Task6
             subj.Dispose();
             /*ende Task 6.1*/
 
-            /*Anfang Task 6.2*/
+            /*Anfang Task 6.2 - Task.run - Continuewith*/
     
             //Listen für tasks und continue.with
             var tasks = new List<Task<string>>();
@@ -106,7 +106,7 @@ namespace Task6
                 tasks.Add(task);
                 Console.WriteLine($"Task {z.Name} hinzugefügt");
             }
-         
+
             foreach (var t in tasks)
             {
                //gib Name aus, wenn Task fertig
@@ -115,20 +115,29 @@ namespace Task6
                );
             }
 
-           // Console.ReadLine();
-           
-            foreach (var t in tasks)
-            {
-                //warte bis Task fertig
-                t.Wait();
-            }
+            // Console.ReadLine();
+
+              foreach (var t in tasks)
+              {
+                  //warte bis Task fertig
+                  t.Wait();
+              }
+
+            /*Task 6.2 Async - Await*/
 
             //Ermöglicht das manuelle Beenden während der Task läuft
             var can_tok_src = new CancellationTokenSource();
             //Berechneetwas wird gestartet + Möglichkeit zum Beenden
             var ber_task = Berechneetwas(can_tok_src.Token);
-
-            Console.ReadLine(); 
+            
+            //Ein Task der zwischen der Berechnung läuft ohne von der async-Methode blockiert zu werden
+            Task.Run(() =>
+            {
+                Task.Delay(500).Wait();
+                Console.WriteLine("Das passiert einfach zwischendurch ohne blockiert zu werden");
+            });
+         
+            Console.ReadLine();
             can_tok_src.Cancel(); //Berechneetwas stoppt
             Console.WriteLine("Berechnung beendet");
 
@@ -144,6 +153,7 @@ namespace Task6
                 {
                     //wenn man etwas eingibt, wird die Operation beendet
                     can_tok_src.ThrowIfCancellationRequested();
+                    Task.Delay(20).Wait();
                     //keine gerade Zahl
                     if (x % 2 != 0) return false; 
                 }
@@ -160,7 +170,7 @@ namespace Task6
                 can_tok_src.ThrowIfCancellationRequested();
                 //wartet auf Gerade_Zahl, Programm blockiert aber nicht
                 if (await Gerade_Zahl(i, can_tok_src)) Console.WriteLine($"Zahl: {i}");
-            }
+            }     
         }
     }
     
